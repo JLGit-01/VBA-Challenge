@@ -16,36 +16,36 @@ Sub alpha3()
   Dim Summary_Table_Row As Integer
   Summary_Table_Row = 2
 
-  ' Loop through all stock detail 
-  For row = 2 To (ActiveSheet.UsedRange.SpecialCells(xlCellTypeLastCell).Row)
+  ' Loop through all stock detail
+  For Row = 2 To (ActiveSheet.UsedRange.SpecialCells(xlCellTypeLastCell).Row)
 
 
 ' Check if we are in the first row of the stock
 
 
-    If Cells(row - 1, 1).Value <> Cells(row, 1).Value Then
-    Opening_Stock = Cells(row,3).Value
+    If Cells(Row - 1, 1).Value <> Cells(Row, 1).Value Then
+    Opening_Stock = Cells(Row, 3).Value
 
     End If
 
-    If Cells(row, 1).Value = Cells(row + 1, 1).Value Then
+    If Cells(Row, 1).Value = Cells(Row + 1, 1).Value Then
 
       ' Add to the Stock Total
-      Stock_Total = Stock_Total + Cells(row, 7).Value
+      Stock_Total = Stock_Total + Cells(Row, 7).Value
 
-    End if
+    End If
 
 
-    If Cells(row, 1).Value <> Cells(row + 1, 1).Value Then
+    If Cells(Row, 1).Value <> Cells(Row + 1, 1).Value Then
 
       ' Set the Stock Ticker name
-      Stock_Letter = Cells(row, 1).Value
-      Closing_Stock = Cells(row,6).Value
+      Stock_Letter = Cells(Row, 1).Value
+      Closing_Stock = Cells(Row, 6).Value
 
-      ' Add to the Brand Total
-      Stock_Total = Stock_Total + Cells(row, 7).Value
+      ' Add to the Stock Total
+      Stock_Total = Stock_Total + Cells(Row, 7).Value
 
-      ' Print the Credit Card Brand in the Summary Table
+      ' Print the Stock Letter in the Summary Table
       Range("J" & Summary_Table_Row).Value = Stock_Letter
 
       ' Print the Brand Amount to the Summary Table
@@ -55,18 +55,22 @@ Sub alpha3()
       Range("L" & Summary_Table_Row).Value = Closing_Stock - Opening_Stock
 
           ' Print the i
-        If Opening_Stock = 0 Then Range("M" & Summary_Table_Row).Value = 0
-        Else Range("M" & Summary_Table_Row).Value = (Closing_Stock - Opening_Stock) / Opening_Stock
-        End If  
+       If Opening_Stock = 0 Then
+       Range("M" & Summary_Table_Row).Value = 0
+       Else
+       Range("M" & Summary_Table_Row).Value = (Closing_Stock - Opening_Stock) / Opening_Stock
+         
+       End If
+        
       Range("M" & Summary_Table_Row).Style = "Percent"
       
-      If Closing_Stock - Opening_Stock < 0 then
+      If Closing_Stock - Opening_Stock < 0 Then
       Range("L" & Summary_Table_Row).Interior.ColorIndex = 3
       End If
 
-      If Closing_Stock - Opening_Stock > = 0 then
+      If Closing_Stock - Opening_Stock >= 0 Then
       Range("L" & Summary_Table_Row).Interior.ColorIndex = 4
-      End If    
+      End If
 
       ' Add one to the summary table row
       Summary_Table_Row = Summary_Table_Row + 1
@@ -76,6 +80,6 @@ Sub alpha3()
 
     End If
 
-  Next row
+  Next Row
 
 End Sub
